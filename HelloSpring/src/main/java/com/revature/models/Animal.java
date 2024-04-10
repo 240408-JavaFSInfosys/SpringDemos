@@ -1,8 +1,12 @@
 package com.revature.models;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+
 @Component //We want to make this class a Spring Bean, which @Component lets us do
+@Scope("prototype") //This will allow us to have different instances of Animal (as opposed to Singletons)
 public class Animal {
 
     private String type;

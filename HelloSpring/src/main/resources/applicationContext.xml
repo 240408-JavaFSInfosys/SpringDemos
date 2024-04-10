@@ -11,6 +11,19 @@
 
     <!-- We need the <beans> tag and its configurations in order for this xml to be used for Spring -->
 
+    <!-- The name attribute can be whatever you want, it is used for reference in other bean declarations -->
+    <!-- The class attribute is the path to the class we want to register as a Bean -->
 
+    <!-- Owner Bean -->
+    <bean name="owner" class="com.revature.models.Owner"></bean>
+
+    <!-- Animal Bean -->
+    <bean name="animal" class="com.revature.models.Animal">
+        <!-- The Animal Class has an Owner as one of its fields. It's a dependency in this case. -->
+        <!-- We need to WIRE the Owner Bean to the Animal Bean -->
+        <property name="owner" ref="owner"></property>
+        <!-- "name" is the name of the owner field in the Animal Class -->
+        <!-- "ref" is the name of the Bean we want to inject -->
+    </bean>
 
 </beans>
