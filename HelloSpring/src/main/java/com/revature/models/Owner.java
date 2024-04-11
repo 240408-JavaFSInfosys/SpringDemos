@@ -1,5 +1,6 @@
 package com.revature.models;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component //This is a stereotype annotation - it makes a Class a Spring Bean

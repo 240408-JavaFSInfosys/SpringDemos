@@ -15,7 +15,7 @@ public class HelloSpringApplication {
 
 		//Create an ApplicationContext object based off of our applicationContext.xml file
 		//This object will serve as our Spring IoC Container, and manage our Beans + Dep. Injection
-		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext2.xml");
 
 		//Now that we have a Spring Container (AppContext), we can ask it for Beans
 
@@ -40,14 +40,14 @@ public class HelloSpringApplication {
 		a.setName("Luna");
 		a.setWeight(1);
 		a.setColor("Red");
-		//we can get the owner properties
+		//we can set the owner properties through getOwner()
 		a.getOwner().setName("Jemal");
 		a.getOwner().setAge(24);
 
 		//Print out the animal Bean
 		System.out.println(a);
 
-		//Bean Scopes -------------------------------------------
+		System.out.println("Bean Scopes -------------------------------------------");
 
 		//Let's try to get a new Animal Bean
 		Animal a2 = ac.getBean(Animal.class);
@@ -56,9 +56,10 @@ public class HelloSpringApplication {
 		System.out.println(a2);
 
 		//This is due to Beans being SINGLETONS by default.
+		// Which means there can only be one instance at a time. They're the same object for now.
 
 		//Let's edit the name of animal a2 and then print both animals
-		a2.setName("Luna2");
+		a2.setName("Cornelius");
 		a2.setWeight(5);
 		System.out.println(a);
 		System.out.println(a2);

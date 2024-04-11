@@ -1,5 +1,6 @@
 package com.revature.models;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +29,12 @@ public class Animal {
         this.name = name;
         this.weight = weight;
         this.color = color;
+        this.owner = owner;
+    }
+
+    //constructor injection for Owner
+    @Autowired
+    public Animal(Owner owner) {
         this.owner = owner;
     }
 
@@ -68,6 +75,8 @@ public class Animal {
         return owner;
     }
 
+    //We could have done setter injection too, but I tend to stick with constructor injection
+    //@Autowired
     public void setOwner(Owner owner) {
         this.owner = owner;
     }
