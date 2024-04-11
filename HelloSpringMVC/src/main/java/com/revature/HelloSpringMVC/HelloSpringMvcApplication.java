@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("com.revature")
+@ComponentScan("com.revature") //This tells Spring to looks for Beans in the com.revature package
 public class HelloSpringMvcApplication {
 
 	public static void main(String[] args) {
