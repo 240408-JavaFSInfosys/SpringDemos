@@ -15,7 +15,7 @@ public class Game {
     private String title;
     private String genre;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "userId")
     private User user;
 
@@ -29,7 +29,8 @@ public class Game {
         -Eager: the dependency is loaded ASAP. Lazy: the dependency is loaded when it's needed
 
     cascade - defines what happens to the dependency (game) when the parent (user) is changed
-        so with cascade = ALL, if a User is deleted, all the games associated with that user will also delete
+        so with cascade = ALL, if one record is deleted, all records associated will also try to delete
+        with cascade = MERGE, cascade only happens for updates.
 
     @JoinColumn - this is the column that links the two tables together.
         Use the name of the Id field in the Parent

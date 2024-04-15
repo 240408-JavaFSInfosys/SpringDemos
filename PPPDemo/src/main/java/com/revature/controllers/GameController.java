@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/games")
 public class GameController {
@@ -47,7 +49,7 @@ public class GameController {
     public ResponseEntity<Game> updateGame(@RequestBody Game game, @PathVariable int userId){
 
         User u = userDAO.findById(userId).get();
-        
+
         game.setUser(u);
 
         Game g = gameDAO.save(game); //updates and inserts use the SAME JPA METHOD, save()
@@ -60,5 +62,55 @@ public class GameController {
 
     }
 
+    //this method will update ONLY the title of a game
+    @PatchMapping("/{gameId}")
+    public ResponseEntity<Object> updateGameTitle(@RequestBody String title, @PathVariable int gameId){
+
+        //get the game by Id, set the new title (setter), save it back to the DB :)
+
+        //this time, we'll use Optionals as they were meant to be used - to prevent NullPointerExceptions
+        Optional<Game> g = gameDAO.findById(gameId);
+
+        //if the Optional is empty, send an error message, otherwise send the updated game
+        if(g.isEmpty()){
+            //This will return a String message telling the user what went wrong
+            //Note the method's return type needs to be ResponseEntity<Optional> for this to work
+            return ResponseEntity.status(404).body("No game found with ID of: " + gameId);
+        }
+
+        //extract the Game from the Optional
+        Game game = g.get();
+
+        //update the title, using the setter
+        game.setTitle(title);
+
+        //finally, save the updated game back to the DB
+        gameDAO.save(game);
+
+        return ResponseEntity.accepted().body(game);
+
+    }
+
+    //this method will delete a game by its ID
+    @DeleteMapping("/{gameId}")
+    public ResponseEntity<Object> deleteGame(@PathVariable int gameId){
+
+        //first we'll get the game by Id to see if it exists
+        //error message if not!!
+        Optional<Game> g = gameDAO.findById(gameId);
+
+        if(g.isEmpty()){
+            return ResponseEntity.status(404).body("No game found with ID of: " + gameId);
+        }
+
+        Game game = g.get();
+
+        //now we can do the delete!
+        gameDAO.deleteById(gameId);
+
+        //we could send back the entire game, but let's send a confirmation message instead
+        return ResponseEntity.accepted().body("Game " + game.getTitle() + " has been deleted");
+
+    }
 
 }
