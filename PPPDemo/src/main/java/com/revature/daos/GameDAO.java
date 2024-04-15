@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface GameDAO extends JpaRepository<Game, Integer> {
 
     //find all games by user id
-    public Game findByUserId(int userId);
+    public Game findByUserUserId(int userId);
 
 }

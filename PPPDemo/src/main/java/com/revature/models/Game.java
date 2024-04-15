@@ -19,6 +19,12 @@ public class Game {
     @JoinColumn(name = "userId")
     private User user;
 
+    @Transient //This makes a field that doesn't get persisted (saved/created) to the database
+    private int transientUserId;
+    //Why would we not want a field to be a column in the DB?
+    //Mostly utility - we didn't do it in this demo but we could have used this to find Users by ID easier
+        //Instead, we put the UserId in path variables when needed.
+
     /* What is going on here^???
 
     This is how we establish a PK/FK relationship. Every Game has a User it belongs to.
