@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController //This makes a class a bean, and converts every response to JSON for us
-@RequestMapping("/users")
+@RequestMapping("/users") //All HTTP Requests ending in /users will be handled by this controller
 public class UserController {
 
-    UserDAO userDAO;
+    private UserDAO userDAO;
 
-    //Constuctor injection (because this controller depends on the UserDAO)
+    //Constructor injection (because this controller depends on the UserDAO)
     @Autowired
     public UserController(UserDAO userDAO) {
         this.userDAO = userDAO;
@@ -27,6 +27,7 @@ public class UserController {
         //if the insert succeeds, this will hold the inserted user
         //if the insert fails, this will hold null
         User u = userDAO.save(user);
+
 
         if(u == null){
             //this will a response with status 500, and NO RESPONSE BODY (which is what build() does)

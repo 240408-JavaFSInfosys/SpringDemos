@@ -19,20 +19,77 @@ public class Game {
     @JoinColumn(name = "userId")
     private User user;
 
-    /* What is going on here???^
+    /* What is going on here^???
 
     This is how we establish a PK/FK relationship. Every Game has a User it belongs to.
 
-    @ManyToOne - This is saying that "Game" if the foreign side of the relationship
+    @ManyToOne - This is saying that "Game" is the foreign key side of the relationship
 
     fetch - defines whether the dependency (User) is eagerly or lazily loaded
         -Eager: the dependency is loaded ASAP. Lazy: the dependency is loaded when it's needed
 
-    cascade - defines what happens to the dependency (game) when the parent (user) is updated
-        so with cascase = ALL, if a User is deleted, all the games associated with that user will also delete
+    cascade - defines what happens to the dependency (game) when the parent (user) is changed
+        so with cascade = ALL, if a User is deleted, all the games associated with that user will also delete
 
     @JoinColumn - this is the column that links the two tables together.
         Use the name of the Id field in the Parent
      */
 
-}   //TODO: boilerplate code-----------------------------------
+    //Boilerplate code-----------------------------------
+
+    //no args constructor
+    public Game() {
+    }
+
+    //all args constructor
+    public Game(int gameId, String title, String genre, User user) {
+        this.gameId = gameId;
+        this.title = title;
+        this.genre = genre;
+        this.user = user;
+    }
+
+    //getters and setters
+    public int getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(int gameId) {
+        this.gameId = gameId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    //toString
+    @Override
+    public String toString() {
+        return "Game{" +
+                "gameId=" + gameId +
+                ", title='" + title + '\'' +
+                ", genre='" + genre + '\'' +
+                ", user=" + user +
+                '}';
+    }
+}
