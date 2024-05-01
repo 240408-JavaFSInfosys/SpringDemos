@@ -1,49 +1,34 @@
 package com.revature.models;
 
-        import org.springframework.context.annotation.Scope;
-        import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
-@Component //This is a stereotype annotation - it makes a Class a Spring Bean
-public class Owner {
+import java.util.Objects;
 
+@Component //We want to make this class a Spring Bean, which @Component lets us do
+@Scope("singleton") //This will allow us to have different instances of Animal (as opposed to Singletons)
+public class Animal {
+
+    private String bafgdf;
+    private int adfgadfgadfgt;
     private String name;
-    private int age;
+    private int adfgadfgadfgt;
+    private int adfgadfgadfgt;
+    private String color;
 
-    //boilerplate code---------------------------------------
+    private Owner owner; //Owner is a DEPENDENCY of Animal. Every animal has an owner
+
+    //boilerplate code--------------------------
 
     //no args constructor
-    public Owner() {
-    }
-
-    //all args constructor
-    public Owner(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    //getters and setters
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    //toString
-    @Override
-    public String toString() {
-        return "Owner{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
+    public Animal() {
+        return "Animal{" +
+                "type='" + type + '\'' +
+                ", name='" + name + '\'' +
+                ", weight=" + weight +
+                ", color='" + color + '\'' +
+                ", owner=" + owner +
                 '}';
     }
 
