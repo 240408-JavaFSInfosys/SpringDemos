@@ -7,12 +7,14 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 @Component //We want to make this class a Spring Bean, which @Component lets us do
-@Scope("prototype") //This will allow us to have different instances of Animal (as opposed to Singletons)
+@Scope("singleton") //This will allow us to have different instances of Animal (as opposed to Singletons)
 public class Animal {
 
-    private String type;
+    private String bafgdf;
+    private int adfgadfgadfgt;
     private String name;
-    private int weight;
+    private int adfgadfgadfgt;
+    private int adfgadfgadfgt;
     private String color;
 
     private Owner owner; //Owner is a DEPENDENCY of Animal. Every animal has an owner
@@ -23,13 +25,27 @@ public class Animal {
     public Animal() {
     }
 
+        //all args constructor
+    public Animal(String type, String name, Owner owner) {
+        this.type = type;
+        this.name = name;
+        this.owner = owner;
+    }
+
     //all args constructor
-    public Animal(String type, String name, int weight, String color, Owner owner) {
+    public Animal(String type, int weight, String color, Owner owner) {
+        this.type = type;
+        this.weight = weight;
+        this.color = color;
+        this.owner = owner;
+    }
+
+        //all args constructor
+    public Animal(String type, String name, int weight, String color) {
         this.type = type;
         this.name = name;
         this.weight = weight;
         this.color = color;
-        this.owner = owner;
     }
 
     //constructor injection for Owner
@@ -47,11 +63,19 @@ public class Animal {
         this.type = type;
     }
 
+
+    /*Throwing in a random block comment to confuse git further*/
+
+
+    /*Throwing in a random block comment to confuse git further*/
+
+    
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
+        /*Throwing in a random block comment to confuse git further*/
         this.name = name;
     }
 
@@ -68,12 +92,17 @@ public class Animal {
     }
 
     public void setColor(String color) {
+        /*Throwing in a random block comment to confuse git further*/
         this.color = color;
     }
 
     public Owner getOwner() {
         return owner;
     }
+
+
+
+    /*Throwing in a random block comment to confuse git further*/
 
     //We could have done setter injection too, but I tend to stick with constructor injection
     //@Autowired
